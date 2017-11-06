@@ -14,15 +14,20 @@ io.on('connection', socket => {
 	console.log('new user connected');
 
 	//emitter with what should be sent to client
-	socket.emit('newMessage', {
-		from: 'you',
-		text: 'Hey.  How are you?',
-		createdAt: 123
-	});
+	// socket.emit('newMessage', {
+	// 	from: 'you',
+	// 	text: 'Hey.  How are you?',
+	// 	createdAt: 123
+	// });
 
 	//listener
 	socket.on('createMessage', message => {
-		console.log('create message', message);
+		// console.log('create message', message);
+		io.emit('newMessage', {
+			from: message.from,
+			text: message.text,
+			createdAt: new Date().getTime()
+		});
 	});
 
 	socket.on('disconnect', socket => {
