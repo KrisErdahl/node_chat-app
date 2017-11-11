@@ -36,7 +36,7 @@ io.on('connection', socket => {
 		// });
 		//Send to all
 		io.emit('newMessage', generateMessage(message.from, message.text));
-		callback('This is from the server');
+		callback();
 		// 	from: message.from,
 		// 	text: message.text,
 		// 	createdAt: new Date().getTime()
