@@ -26,7 +26,7 @@ io.on('connection', socket => {
 	// });
 
 	//listener
-	socket.on('createMessage', message => {
+	socket.on('createMessage', (message, callback) => {
 		// console.log('create message', message);
 		//Send to everyone except sender
 		// socket.broadcast.emit('newMessage', {
@@ -36,6 +36,7 @@ io.on('connection', socket => {
 		// });
 		//Send to all
 		io.emit('newMessage', generateMessage(message.from, message.text));
+		callback('This is from the server');
 		// 	from: message.from,
 		// 	text: message.text,
 		// 	createdAt: new Date().getTime()

@@ -16,4 +16,33 @@ socket.on('disconnect', function() {
 //listener for event newEmail
 socket.on('newMessage', function(message) {
 	console.log('new message', message);
+	const li = jQuery('<li></li>');
+	li.text(`${message.from}: ${message.text}`);
+
+	jQuery('#messages').append(li);
+});
+
+// Tester for initial setup -> fake user Frank says hi
+// socket.emit(
+// 	'createMessage',
+// 	{
+// 		from: 'Frank',
+// 		text: 'Hi'
+// 	},
+// 	function(dataFromCallback) {
+// 		console.log('got it', dataFromCallback);
+// 	}
+// );
+
+// turn off default browser behavior of page refresh
+jQuery('#message-form').on('submit', function(e) {
+	e.preventDefault();
+	socket.emit(
+		'createMessage',
+		{
+			from: 'User',
+			text: jQuery('[name=message]').val()
+		},
+		function() {}
+	);
 });
