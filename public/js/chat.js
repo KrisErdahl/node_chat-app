@@ -1,6 +1,6 @@
 const socket = io();
 
-function scrollToBottom () {
+function scrollToBottom() {
 	// Selectors
 	const messages = jQuery('#messages');
 	const newMessage = messages.children('li:last-child');
@@ -11,15 +11,23 @@ function scrollToBottom () {
 	const newMessageHeight = newMessage.innerHeight();
 	const lastMessageHeight = newMessage.prev().innerHeight();
 
-	if (clientHeight+scrollTop+newMessageHeight+lastMessageHeight >= scrollHeight) {
+	if (clientHeight + scrollTop + newMessageHeight + lastMessageHeight >= scrollHeight) {
 		// console.log('should scroll');
 		messages.scrollTop(scrollHeight);
 	}
 }
 
 socket.on('connect', function() {
-	console.log('connected to server');
-
+	// console.log('connected to server');
+	const params = jQuery.deparam(window.location.search);
+	socket.emit('join', params, function(err) {
+		if (err) {
+			alert(err);
+			window.location.href = '/';
+		} else {
+			console.log('No error');
+		}
+	});
 	// socket.emit('createMessage', {
 	// 	from: 'Kris',
 	// 	text: 'Hey group!'
