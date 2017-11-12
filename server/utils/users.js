@@ -1,10 +1,10 @@
-[
-	{
-		id: 'sdrrtgsr',
-		name: 'Kris',
-		room: 'The Office Fans'
-	}
-];
+// [
+// 	{
+// 		id: 'sdrrtgsr',
+// 		name: 'Kris',
+// 		room: 'The Office Fans'
+// 	}
+// ];
 
 // addUser method (id, name, room)
 // removeUser method (id)
@@ -27,7 +27,6 @@ class Users {
 		if (user) {
 			this.users = this.users.filter(user => user.id !== id);
 		}
-
 		return user;
 	}
 
